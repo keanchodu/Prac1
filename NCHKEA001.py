@@ -15,15 +15,27 @@ import time
 # Logic that you write
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(17,GPIO.OUT)
+GPIO.setup(23,GPIO.IN,pull_up_down=GPIO.PUD_UP)
 def main():
     print("write your logic here")
     #Part 1 - turn LED on then off
     # Turn LED on
-    GPIO.output(17,GPIO.HIGH)
-    time.sleep(3) #LED on for three seconds
+#    GPIO.output(17,GPIO.HIGH)
+#    time.sleep(3) #LED on for three seconds
     #Turn off LED
-    GPIO.output(17,GPIO.LOW)
-    time.sleep(2) #LED off for two seconds
+#    GPIO.output(17,GPIO.LOW)
+#    time.sleep(2) #LED off for two seconds
+
+
+    #Part 2 - toggle LED using a button
+    GPIO.output(17,False) #start off with LED off
+    try:
+	while True:
+		GPIO.output(17, not GPIO.input(23))
+		time.sleep(.1)
+    finally:
+	GPIO.output(17,False)
+
 
 # Only run the functions if 
 if __name__ == "__main__":
